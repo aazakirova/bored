@@ -16,14 +16,12 @@ theme: /
         q!: *start
         q!: $hi
         random:
-            a: Hello! 
-            a: Hi! 
-        a: I am {{$injector.botName}}. I am always happy to find new activities for you :)
+            a: Hello! I am {{$injector.botName}}. I am always happy to find new activities for you :)
+            a: Hi! My name is {{$injector.botName}}. It seems like you need some new ideas for today :)
+            a: What's up! It's {{$injector.botName}}. Bored, huh?
         script:
             $jsapi.startSession()
         go!: /howAreYou
-        
-
             
     state: CatchAll   
         event!: noMatch
@@ -53,16 +51,21 @@ theme: /
             "Let's get started!" -> /activityType
             "Cancel" -> /Welcome
             
-    state: activityType
+    state: activityType || modal = true
         a: Choose which type of activity you would like to do: Education, Recreational, Social, DIY, Charity, Cooking, Relaxation, Music, Busywork.
-        q: (* Education / Recreational / Social / DIY / Charity / Cooking / Relaxation / Music / Busywork *)
+        q: (Education / Recreational / Social / DIY / Charity / Cooking / Relaxation / Music / Busywork)
+        go!: /Offer
+        
+        state: LocalCatchAll
+            event: noMatch
+            a: Please, write the word exact the same way as I've spelled you it in the offer list.
+            go!: ..
+            
+    state: Offer 
         script:
             log(toPrettyString($parseTree));
             $session.type = $parseTree._Root;
-        go!: /Offer
-    
-    state: Offer 
-        a: Great chose! Let's see what {{$session.type}} activity I can offer you.
+        a: Great choice! Let's see what {{$session.type}} activity I can offer you.
         go!: /Play
         
     state: Play
@@ -71,8 +74,8 @@ theme: /
         if: $temp.task
             random:
                 a: Look what idea I've found for you! {{$temp.task.activity}}. I hope you like it!
-                a: What do you think? Great choise, isn't it? 
-                a: What an idea! 
+                a: {{$temp.task.activity}}. What do you think? Cool activity, isn't it? 
+                a: {{$temp.task.activity}}. What an idea! 
         go!: /Satisfaction 
             
     state: Satisfaction
@@ -82,6 +85,5 @@ theme: /
             
     state: GoodBye
         a: I was happy to help you. Hope you'll be back soon :)
-        
-        
-        
+        q: $bye
+    
