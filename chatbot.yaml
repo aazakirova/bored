@@ -1,10 +1,13 @@
-name: zb-cailapub
+name: iAmBored
 
 entryPoint: main.sc
 
 botEngine: v2
 language: en
 
+injector:
+    botName: Jessica
+    
 tests:
   include:
     - test.xml
