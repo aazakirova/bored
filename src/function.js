@@ -1,5 +1,5 @@
 function getActivity(type) {
-    var response = $http.get("http://www.boredapi.com/api/activity/", {
+    var response = $http.get("https://www.boredapi.com/api/activity", {
         timout: 15000,
         query: {
             type: type,
@@ -10,7 +10,7 @@ function getActivity(type) {
         return false;
     }
     
-    var task = {};
+var task = {};
     task.activity = response.data.activity;
     task.participants = response.data.participants;
     return task; 

@@ -51,23 +51,23 @@ theme: /
             "Let's get started!" -> /activityType
             "Cancel" -> /Welcome
             
-    state: activityType || modal = true
+    state: activityType
         a: Choose which type of activity you would like to do: Education, Recreational, Social, DIY, Charity, Cooking, Relaxation, Music, Busywork.
-        q!: (Education / Recreational / Social / DIY / Charity / Cooking / Relaxation / Music / Busywork)
+        q!: * $activity *
         script:
             log(toPrettyString($parseTree));
-            $session.type = $parseTree._Root;
-        
-        
+            $temp.type = $parseTree._Root;
+        go!: /Play
+            
         state: LocalCatchAll
             event: noMatch
             a: Please, write the word exact the same way as I've spelled it in the offer list.
             go!: ..
         
     state: Play
-        a: Great choice! Let's see what {{$session.type}} activity I can offer you.
+        a: Great choice! Let's see what {{$temp.type}} activity I can offer you.
         script: 
-            $temp.task = getActivity($session.type);
+            $temp.task = getActivity($temp.type);
         if: $temp.task
             random:
                 a: Look what idea I've found for you! {{$temp.task.activity}}. I hope you like it!
