@@ -57,12 +57,15 @@ theme: /
         a: Choose which type of activity you would like to do: Education, Recreational, Social, DIY, Charity, Cooking, Relaxation, Music, Busywork.
         q: (* Education / Recreational / Social / DIY / Charity / Cooking / Relaxation / Music / Busywork *)
         script:
+            log(toPrettyString($parseTree));
             $session.type = $parseTree._Root;
         go!: /Play
         
     state: Play
         script: 
-            $temp.activity = getActivity($session.type);
+            $temp.task = getActivity($session.type);
+        if: $temp.activity
+            a: That is my idea: {{$temp.task.activity}}. I hope you like it!
         
         
         
