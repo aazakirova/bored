@@ -1,3 +1,3 @@
 theme: /
 patterns:
-    $hi = (прив* / здорово / зравствуй* / хелло / хай)
+    $hi = * (hi* / hello / hola* / good morning / good evening / good afternoon)
