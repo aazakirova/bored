@@ -6,11 +6,14 @@ function getActivity(type) {
             lang: "en"
         }
     });
+    
+//    log("@@@@" + toPrettyString(response)); 
+    
     if (!response.isOk || !response.data) {
         return false;
     }
     
-var task = {};
+    var task = {};
     task.activity = response.data.activity;
     task.participants = response.data.participants;
     return task; 

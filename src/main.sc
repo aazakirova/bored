@@ -48,32 +48,34 @@ theme: /
             
     state: NormalButtons
         buttons:
-            "Let's get started!" -> /activityType
+            "Let's get started!" -> /Ask
             "Cancel" -> /Welcome
+    
+    state: Ask
+        a: Choose which type of activity you would like to do: education, recreational, social, diy, charity, cooking, relaxation, music, busywork.
+        go!: /activityType
             
     state: activityType
-        a: Choose which type of activity you would like to do: Education, Recreational, Social, DIY, Charity, Cooking, Relaxation, Music, Busywork.
         q!: * $activity *
         script:
             log(toPrettyString($parseTree));
-            $temp.type = $parseTree._Root;
-        go!: /Play
-            
+            $session.type = $parseTree._activity;
+        go!: /greatChoice
+        
         state: LocalCatchAll
             event: noMatch
             a: Please, write the word exact the same way as I've spelled it in the offer list.
             go!: ..
         
-    state: Play
-        a: Great choice! Let's see what {{$temp.type}} activity I can offer you.
+    state: greatChoice
+        a: Great choice! Let's see what {{$session.type}} activity I can offer you.            go!: /Do
         script: 
-            $temp.task = getActivity($temp.type);
+            $temp.task = getActivity($session.type);
         if: $temp.task
-            random:
-                a: Look what idea I've found for you! {{$temp.task.activity}}. I hope you like it!
-                a: {{$temp.task.activity}}. What do you think? Cool activity, isn't it? 
-                a: {{$temp.task.activity}}. What an idea! 
-        go!: /Satisfaction 
+        random:
+            a: Look what idea I've found for you! {{$temp.task.activity}}. I hope you like it!
+            a: {{$temp.task.activity}}. What do you think? Cool activity, isn't it?                         a: {{$temp.task.activity}}. What an idea! 
+            go!: /Satisfaction 
             
     state: Satisfaction
         buttons:
