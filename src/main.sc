@@ -37,12 +37,12 @@ theme: /
             a: How are you?
         
         state: GoodMood
-            q: * (good* / well / ok* / cool / nice / fine / happy* / fifty fifty / so so) *
+            q: * (good* / well / ok* / cool / nice / fine / happy*) *
             a: I can make your day even cooler!
             go!: /NormalButtons
             
         state: BadSad
-            q: * (bad* / sad* / tough* / rough*) *
+            q: * (bad* / sad* / tough* / rough* / so so / fifty fifty) *
             a: I can try to make your day a little bit nicer!
             go!: /NormalButtons
             
@@ -84,6 +84,8 @@ theme: /
             "Cool, thanks!" -> /GoodBye
             
     state: GoodBye
-        a: I was happy to help you. Hope you'll be back soon :)
+        random:
+            a: I was happy to help you. Hope you'll be back soon :)
+            a: I'm always here for you with endless number of activities! Already miss you, hope to see you soon :)
+            a: Looking forward to seeing you soon, bye!
         q: $bye
-    
