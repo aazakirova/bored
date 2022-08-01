@@ -7,8 +7,6 @@ function getActivity(type) {
         }
     });
     
-//    log("@@@@" + toPrettyString(response)); 
-    
     if (!response.isOk || !response.data) {
         return false;
     }

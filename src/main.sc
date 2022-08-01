@@ -53,18 +53,20 @@ theme: /
     
     state: Ask
         a: Choose which type of activity you would like to do: education, recreational, social, diy, charity, cooking, relaxation, music, busywork.
-         
+      
         state: LocalCatchAll
             event: noMatch
             a: Please, write the word exact the same way as I've spelled it in the offer list.
-            go!: ..
+            go!: ..  
             
-    state: activityType
+    state: activityType || modal = true
         q!: * $activity *
         script:
             log(toPrettyString($parseTree));
             $session.type = $parseTree._activity;
         go!: /activityType/greatChoice
+        
+
         
         state: greatChoice
             a: Great choice! Let's see what {{$session.type}} activity I can offer you.                    
