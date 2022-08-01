@@ -53,35 +53,35 @@ theme: /
     
     state: Ask
         a: Choose which type of activity you would like to do: education, recreational, social, diy, charity, cooking, relaxation, music, busywork.
-        go!: /activityType
+         
+        state: LocalCatchAll
+            event: noMatch
+            a: Please, write the word exact the same way as I've spelled it in the offer list.
+            go!: ..
             
     state: activityType
         q!: * $activity *
         script:
             log(toPrettyString($parseTree));
             $session.type = $parseTree._activity;
-        go!: /greatChoice
+        go!: /activityType/greatChoice
         
-        state: LocalCatchAll
-            event: noMatch
-            a: Please, write the word exact the same way as I've spelled it in the offer list.
-            go!: ..
-        
-    state: greatChoice
-        a: Great choice! Let's see what {{$session.type}} activity I can offer you.            go!: /Do
-        script: 
-            $temp.task = getActivity($session.type);
-        if: $temp.task
-        random:
-            a: Look what idea I've found for you! {{$temp.task.activity}}. I hope you like it!
-            a: {{$temp.task.activity}}. What do you think? Cool activity, isn't it?                         a: {{$temp.task.activity}}. What an idea! 
-            go!: /Satisfaction 
+        state: greatChoice
+            a: Great choice! Let's see what {{$session.type}} activity I can offer you.                    
+            script: 
+                $temp.task = getActivity($session.type);
+            if: $temp.task 
+                random:
+                    a: Look what idea I've found for you! {{$temp.task.activity}}. I hope you like it!
+                    a: {{$temp.task.activity}}. What do you think? Cool activity, isn't it?                         
+                    a: {{$temp.task.activity}}. What an idea! 
+                go!: /activityType/Satisfaction
             
-    state: Satisfaction
-        buttons:
-            "Another activity!" -> /activityType
-            "Cool, thanks!" -> /GoodBye
-            
+        state: Satisfaction
+            buttons:
+                "Another activity!" -> /Ask
+                "Cool, thanks!" -> /GoodBye
+                
     state: GoodBye
         random:
             a: I was happy to help you. Hope you'll be back soon :)
