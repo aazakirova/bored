@@ -56,7 +56,7 @@ theme: /
       
         state: LocalCatchAll
             event: noMatch
-            a: Please, write the word exact the same way as I've spelled it in the offer list.
+            a: Please, write the type of the activity exact the same way as I've spelled it in the offer list.
             go!: ..  
             
     state: activityType || modal = true
