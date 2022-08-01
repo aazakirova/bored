@@ -59,14 +59,29 @@ theme: /
         script:
             log(toPrettyString($parseTree));
             $session.type = $parseTree._Root;
+        go!: /Offer
+    
+    state: Offer 
+        a: Great chose! Let's see what {{$session.type}} activity I can offer you.
         go!: /Play
         
     state: Play
         script: 
             $temp.task = getActivity($session.type);
-        if: $temp.activity
-            a: That is my idea: {{$temp.task.activity}}. I hope you like it!
-        
+        if: $temp.task
+            random:
+                a: Look what idea I've found for you! {{$temp.task.activity}}. I hope you like it!
+                a: What do you think? Great choise, isn't it? 
+                a: What an idea! 
+        go!: /Satisfaction 
+            
+    state: Satisfaction
+        buttons:
+            "Another activity!" -> /activityType
+            "Cool, thanks!" -> /GoodBye
+            
+    state: GoodBye
+        a: I was happy to help you. Hope you'll be back soon :)
         
         
         
