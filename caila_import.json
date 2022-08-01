@@ -15,25 +15,100 @@
     "shared" : false
   },
   "intents" : [ {
-    "id" : 11520934,
-    "path" : "/bye",
+    "id" : 11526204,
+    "path" : "/activity",
     "enabled" : true,
     "shared" : false,
     "phrases" : [ {
-      "text" : "bye"
+      "text" : "Education"
+    }, {
+      "text" : "Recreational"
+    }, {
+      "text" : "Social"
+    }, {
+      "text" : "DIY"
+    }, {
+      "text" : "Charity"
+    }, {
+      "text" : "Relaxation"
+    }, {
+      "text" : "Music"
+    }, {
+      "text" : "Cooking"
+    }, {
+      "text" : "Busywork"
     } ],
-    "priority" : 0
-  }, {
-    "id" : 11520935,
-    "path" : "/hello",
-    "enabled" : true,
-    "shared" : false,
-    "phrases" : [ {
-      "text" : "hello"
+    "patterns" : [ ],
+    "slots" : [ {
+      "name" : "activity",
+      "entity" : "Activity",
+      "required" : true,
+      "prompts" : [ ],
+      "array" : false
     } ],
     "priority" : 0
   } ],
-  "entities" : [ ],
+  "entities" : [ {
+    "entity" : {
+      "id" : 164336,
+      "name" : "Activity",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false
+    },
+    "records" : [ {
+      "id" : 13910317,
+      "type" : "synonyms",
+      "rule" : [ "Busywork" ],
+      "value" : ""
+    }, {
+      "id" : 13910314,
+      "type" : "synonyms",
+      "rule" : [ "Charity" ],
+      "value" : ""
+    }, {
+      "id" : 13910319,
+      "type" : "synonyms",
+      "rule" : [ "Cooking" ],
+      "value" : ""
+    }, {
+      "id" : 13910315,
+      "type" : "synonyms",
+      "rule" : [ "DIY" ],
+      "value" : ""
+    }, {
+      "id" : 13910312,
+      "type" : "synonyms",
+      "rule" : [ "Education" ],
+      "value" : ""
+    }, {
+      "id" : 13910320,
+      "type" : "synonyms",
+      "rule" : [ "Music" ],
+      "value" : ""
+    }, {
+      "id" : 13910318,
+      "type" : "synonyms",
+      "rule" : [ "Recreational" ],
+      "value" : ""
+    }, {
+      "id" : 13910316,
+      "type" : "synonyms",
+      "rule" : [ "Relaxation" ],
+      "value" : ""
+    }, {
+      "id" : 13910313,
+      "type" : "synonyms",
+      "rule" : [ "Social" ],
+      "value" : ""
+    } ]
+  } ],
   "enabledSystemEntities" : [ "duckling.number", "duckling.time", "duckling.duration", "duckling.phone-number", "duckling.email", "duckling.url" ],
   "spellerDictionary" : [ ],
   "systemEntities" : [ {

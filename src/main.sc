@@ -37,7 +37,7 @@ theme: /
             a: How are you?
         
         state: GoodMood
-            q: * (good* / well / ok* / cool / nice / fine / happy*) *
+            q: * (good* / well / ok* / cool / nice / fine / happy* / k) *
             a: I can make your day even cooler!
             go!: /NormalButtons
             
@@ -53,22 +53,19 @@ theme: /
             
     state: activityType || modal = true
         a: Choose which type of activity you would like to do: Education, Recreational, Social, DIY, Charity, Cooking, Relaxation, Music, Busywork.
-        q: (Education / Recreational / Social / DIY / Charity / Cooking / Relaxation / Music / Busywork)
-        go!: /Offer
-        
-        state: LocalCatchAll
-            event: noMatch
-            a: Please, write the word exact the same way as I've spelled you it in the offer list.
-            go!: ..
-            
-    state: Offer 
+        q!: (Education / Recreational / Social / DIY / Charity / Cooking / Relaxation / Music / Busywork)
         script:
             log(toPrettyString($parseTree));
             $session.type = $parseTree._Root;
-        a: Great choice! Let's see what {{$session.type}} activity I can offer you.
-        go!: /Play
+        
+        
+        state: LocalCatchAll
+            event: noMatch
+            a: Please, write the word exact the same way as I've spelled it in the offer list.
+            go!: ..
         
     state: Play
+        a: Great choice! Let's see what {{$session.type}} activity I can offer you.
         script: 
             $temp.task = getActivity($session.type);
         if: $temp.task
